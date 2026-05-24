@@ -40,6 +40,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import coil.compose.AsyncImage
 
 enum class TerminalScreen {
     BOOT,
@@ -1105,6 +1106,56 @@ fun AnimeDetailScreen(details: AnimeDetails, onCommand: (String) -> Unit) {
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 6.dp)
         )
+
+        // Visual Image Poster (Visual Frame) - Centered with high-tech retro border
+        if (details.thumbnailUrl.isNotEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .width(180.dp)
+                        .border(1.dp, RetroColors.GreenPrimary.copy(alpha = 0.5f))
+                        .background(Color.Black)
+                        .padding(bottom = 4.dp)
+                ) {
+                    Text(
+                        text = "┌── VISUAL FEED ──┐",
+                        color = RetroColors.GreenPrimary,
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(vertical = 4.dp)
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .width(160.dp)
+                            .height(230.dp)
+                            .border(1.dp, RetroColors.PinkAccent.copy(alpha = 0.8f))
+                    ) {
+                        AsyncImage(
+                            model = details.thumbnailUrl,
+                            contentDescription = "Visual Poster for ${details.title}",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = androidx.compose.ui.layout.ContentScale.Crop
+                        )
+                    }
+
+                    Text(
+                        text = "[RESOLUTION: HIGH-RES]",
+                        color = RetroColors.GreenPrimary.copy(alpha = 0.7f),
+                        fontFamily = FontFamily.Monospace,
+                        fontSize = 9.sp,
+                        modifier = Modifier.padding(vertical = 4.dp)
+                    )
+                }
+            }
+        }
 
         // Metadata grid styled in a table
         Column(
