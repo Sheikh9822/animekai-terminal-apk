@@ -1,0 +1,6 @@
+{
+  "name": "AnimeKai Terminal",
+  "description": "Retro cyberpunk terminal client for exploring and streaming anime streams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
